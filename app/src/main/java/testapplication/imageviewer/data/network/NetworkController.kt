@@ -8,6 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import testapplication.imageviewer.BuildConfig
 import testapplication.imageviewer.application.utils.Logger
 
 /**
@@ -23,23 +24,22 @@ class NetworkController {
     private var mApiController: ApiController
 
     init {
-        Logger.testLog("NetworkClient Create")
+        if (BuildConfig.DEBUG) Logger.testLog("create Controller NetworkClient")
 
         val gson = GsonBuilder()
                 .setLenient()
                 .create()
 
-        val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
+        val httpClientBuilder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG)
+            addLogInterceptor(httpClientBuilder)
 
-        val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor(logging)
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(httpClient.build())
+                .client(httpClientBuilder.build())
                 .build()
         mApiController = retrofit.create(ApiController::class.java)
     }
@@ -54,5 +54,11 @@ class NetworkController {
 
     fun getSeriesDetail(seriesId: String): Observable<ResponseBody> {
         return  mApiController.getSeriesDetail(seriesId)
+    }
+
+    private fun addLogInterceptor(httpClientBuilder: OkHttpClient.Builder) {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        httpClientBuilder.addInterceptor(logging)
     }
 }

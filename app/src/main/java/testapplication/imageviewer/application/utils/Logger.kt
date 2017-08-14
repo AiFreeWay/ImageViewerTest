@@ -21,7 +21,7 @@ class Logger {
             Log.e(LOG_TAG, STRING_WRITER.toString())
         }
 
-        fun logDebug(message: String) {
+        fun logDebug(message: String?) {
             Log.d(LOG_TAG, message)
         }
 
