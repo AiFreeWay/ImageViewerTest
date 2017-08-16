@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
+
+kapt {
+    generateStubs = true
+}
 
 android {
     compileSdkVersion SDK
@@ -48,7 +51,6 @@ dependencies {
     //Arch
     compile "android.arch.lifecycle:runtime:$androidArh"
     compile "android.arch.lifecycle:extensions:$androidArh"
-    compile "android.arch.persistence.room:runtime:$androidArh"
 
     //Dagger2
     compile "com.google.dagger:dagger:$dagger"
@@ -58,6 +60,9 @@ dependencies {
     //RxJava2
     compile "io.reactivex.rxjava2:rxjava:$rxJava"
     compile "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+
+    //DB
+    compile "io.realm:realm-android:$realm"
 
     //Networking
     compile "com.squareup.okhttp3:okhttp:$okhttp"

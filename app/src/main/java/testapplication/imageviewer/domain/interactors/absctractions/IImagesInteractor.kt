@@ -9,7 +9,6 @@ import testapplication.imageviewer.domain.models.Image
 interface IImagesInteractor {
 
     fun getNewestImage(): Observable<Image>
-    fun addToFavorite(image: Image): Observable<Unit>
-    fun removeFromFavorite(image: Image): Observable<Unit>
+    fun changeFavoriteFavorite(image: Image): Observable<Image>
     fun getFavoriteImages(): Observable<List<Image>>
 }

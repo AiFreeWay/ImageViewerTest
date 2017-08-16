@@ -5,10 +5,11 @@ import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import testapplication.imageviewer.BuildConfig
+import testapplication.imageviewer.application.di.scopes.PerParentScreen
 import testapplication.imageviewer.application.utils.Logger
 import testapplication.imageviewer.domain.interactors.ImagesInteractor
 import testapplication.imageviewer.domain.interactors.absctractions.IImagesInteractor
-import testapplication.imageviewer.presentation.ui.base.ParentView
+import testapplication.imageviewer.presentation.screens.base.ParentView
 import testapplication.imageviewer.presentation.utils.FragmentNavigator
 
 /**
@@ -20,7 +21,7 @@ class ParentScreenModule(views: ParentView) {
     private val mCicerone: Cicerone<Router>
 
     init {
-        if (BuildConfig.DEBUG) Logger.testLog("created MODULE ParentScreenModule")
+        if (BuildConfig.DEBUG) Logger.logDebug("created MODULE ParentScreenModule")
 
         mCicerone = Cicerone.create()
         mCicerone.navigatorHolder.setNavigator(FragmentNavigator(views.getActivity(),
@@ -29,10 +30,12 @@ class ParentScreenModule(views: ParentView) {
     }
 
     @Provides
+    @PerParentScreen
     fun provideFragmentRouter(): Router {
         return mCicerone.router
     }
 
     @Provides
+    @PerParentScreen
     fun provideImagesInteractor(interactor: ImagesInteractor): IImagesInteractor = interactor
 }

@@ -3,8 +3,10 @@ package testapplication.imageviewer.application.di.components
 import dagger.Component
 import testapplication.imageviewer.application.di.modules.ParentScreenModule
 import testapplication.imageviewer.application.di.scopes.PerParentScreen
-import testapplication.imageviewer.presentation.ui.main.presenters.AcMainPresenter
-import testapplication.imageviewer.presentation.ui.main.presenters.FmtImageViewerPresenter
+import testapplication.imageviewer.data.repositories.abstractions.IRepository
+import testapplication.imageviewer.presentation.screens.main.presenters.AcMainPresenter
+import testapplication.imageviewer.presentation.screens.main.presenters.FmtFavoriteImagesPresenter
+import testapplication.imageviewer.presentation.screens.main.presenters.FmtImageViewerPresenter
 
 /**
  * Created by root on 03.08.17.
@@ -13,6 +15,9 @@ import testapplication.imageviewer.presentation.ui.main.presenters.FmtImageViewe
 @Component(modules = arrayOf(ParentScreenModule::class), dependencies = arrayOf(RootComponent::class))
 interface ParentScreenComponent {
 
+    fun provideRepository() : IRepository
+
     fun inject(presenter: AcMainPresenter)
     fun inject(presenter: FmtImageViewerPresenter)
+    fun inject(presenter: FmtFavoriteImagesPresenter)
 }

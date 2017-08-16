@@ -1,6 +1,8 @@
 package testapplication.imageviewer.data.repositories.abstractions
 
 import io.reactivex.Observable
+import okhttp3.ResponseBody
+import testapplication.imageviewer.data.db.entities.ImageDB
 import testapplication.imageviewer.domain.models.Image
 
 /**
@@ -8,8 +10,7 @@ import testapplication.imageviewer.domain.models.Image
  */
 interface IRepository {
 
-    fun getNewestImage(): Observable<Image>
-    fun addToFavorite(image: Image): Observable<Unit>
-    fun removeFromFavorite(image: Image): Observable<Unit>
-    fun getFavoriteImages(): Observable<List<Image>>
+    fun getNewestImage(): Observable<ResponseBody>
+    fun changeFavoriteFavorite(image: Image): Observable<Image>
+    fun getFavoriteImages(): Observable<List<ImageDB>>
 }

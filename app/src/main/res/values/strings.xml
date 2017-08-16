@@ -1,2 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="newest_image_title">Последнее изображение</string>
+    <string name="saved_image_title">Сохраненное изображение</string>
+    <string name="favorites">Избранное</string>
 </resources>

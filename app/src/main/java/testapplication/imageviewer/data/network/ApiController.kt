@@ -11,11 +11,5 @@ import retrofit2.http.Path
 interface ApiController {
 
     @GET(".")
-    fun getSeasons(): Observable<ResponseBody>
-
-    @GET(NetworkController.SEASON_URI+"{seasonId}")
-    fun getSeasonSeries(@Path("seasonId") seasonId: String): Observable<ResponseBody>
-
-    @GET("{seriesId}")
-    fun getSeriesDetail(@Path("seriesId") seriesId: String): Observable<ResponseBody>
+    fun getNewestImage(): Observable<ResponseBody>
 }

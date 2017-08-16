@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="internal_padding">8dp</dimen>
+    <dimen name="external_padding">16dp</dimen>
+    <dimen name="big_padding">36dp</dimen>
+    <dimen name="holder_height">200dp</dimen>
+</resources>
