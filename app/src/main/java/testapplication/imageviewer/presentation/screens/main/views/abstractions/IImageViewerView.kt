@@ -12,4 +12,6 @@ interface IImageViewerView : ChildView {
     fun changeFavoriteState(image: Image)
     fun lockButton()
     fun unlockButton()
+    fun showFavoriteListButton()
+    fun hideFavoriteListButton()
 }

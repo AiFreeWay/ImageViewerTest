@@ -43,6 +43,8 @@ class FmtImageViewerPresenter : BasePresenter<IImageViewerView>(), IFmtImageView
         } else {
             initViewIsNewest()
             addDissposable(mImagesInteractor.getNewestImage()
+                    .map { mImagesInteractor.subscribeOnUpdateImage { this::doOnGetNewestImage }
+                        it }
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnGetNewestImage, this::doOnError))
         }
@@ -77,13 +79,14 @@ class FmtImageViewerPresenter : BasePresenter<IImageViewerView>(), IFmtImageView
         return mImageFromArguments != null
     }
 
+    override fun getImageFromArguments(): Image? = mImageFromArguments
+
     private fun doOnChangeStateFavorite(image: Image) {
         stopProgress()
         mView.changeFavoriteState(image)
     }
 
     private fun doOnGetNewestImage(image: Image) {
-        Logger.testLog("doOnGetNewestImage")
         stopProgress()
         mView.loadNewestImage(image)
     }
@@ -105,11 +108,13 @@ class FmtImageViewerPresenter : BasePresenter<IImageViewerView>(), IFmtImageView
     }
 
     private fun initViewIsNewest() {
+        mView.showFavoriteListButton()
         mView.getMainView().disableHomeToolbarButton()
         mView.getMainView().setToolbarTitle(R.string.newest_image_title)
     }
 
     private fun initViewIsSaved() {
+        mView.hideFavoriteListButton()
         mView.getMainView().enableHomeToolbarButton()
         mView.getMainView().setToolbarTitle(R.string.saved_image_title)
     }

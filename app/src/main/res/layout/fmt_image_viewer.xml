@@ -17,25 +17,28 @@
             android:scaleType="centerCrop" />
     </HorizontalScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fmt_image_viewer_fab_favorit_list"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/big_padding"
         android:layout_marginEnd="@dimen/external_padding"
-        android:src="@drawable/ic_menu"
-        app:fabSize="normal" />
+        android:orientation="vertical">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fmt_image_viewer_fab_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="107dp"
-        android:layout_marginEnd="@dimen/external_padding"
-        android:src="@drawable/ic_star_border"
-        app:fabSize="normal" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fmt_image_viewer_fab_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_border"
+            app:fabSize="normal" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fmt_image_viewer_fab_favorit_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/external_padding"
+            android:src="@drawable/ic_menu"
+            app:fabSize="normal" />
+    </LinearLayout>
 </RelativeLayout>

@@ -6,6 +6,7 @@ import dagger.Provides
 import io.realm.Realm
 import testapplication.imageviewer.BuildConfig
 import testapplication.imageviewer.application.utils.Logger
+import testapplication.imageviewer.application.utils.PushNotificationController
 import testapplication.imageviewer.data.db.DBController
 import testapplication.imageviewer.data.network.NetworkController
 import testapplication.imageviewer.data.repositories.Repository
@@ -44,5 +45,11 @@ class RootModule(private val mContext: Context) {
     @Singleton
     fun provideRepository(repository : Repository): IRepository {
         return repository
+    }
+
+    @Provides
+    @Singleton
+    fun providePushNotificationController(): PushNotificationController {
+        return PushNotificationController(mContext)
     }
 }

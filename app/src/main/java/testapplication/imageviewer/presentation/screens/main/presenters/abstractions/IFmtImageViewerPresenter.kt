@@ -12,5 +12,6 @@ interface IFmtImageViewerPresenter {
     fun changeStateFavorite(image: Image)
     fun openFavoriteListScreen()
     fun setImageFromArguments(image: Image?)
+    fun getImageFromArguments(): Image?
     fun isBeImageFromArgumetns(): Boolean
 }

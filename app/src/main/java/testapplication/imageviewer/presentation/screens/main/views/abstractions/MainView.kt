@@ -14,4 +14,5 @@ interface MainView : ParentView {
     fun disableHomeToolbarButton()
     fun setToolbarTitle(title: Int)
     fun getParentComponent(): ParentScreenComponent
+    fun setPushOnState(state: Boolean)
 }

@@ -21,6 +21,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.screens.main.views.activities.MainActivity" />
-    </application>
 
+        <service android:name=".presentation.services.UpdateImageService" />
+
+        <receiver android:name=".presentation.receivers.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+    </application>
 </manifest>

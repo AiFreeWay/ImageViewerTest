@@ -3,4 +3,7 @@
     <string name="newest_image_title">Последнее изображение</string>
     <string name="saved_image_title">Сохраненное изображение</string>
     <string name="favorites">Избранное</string>
+    <string name="new_image_text">Последнее изображение вы можете просмотреть в приложении</string>
+    <string name="new_image_title">Новое изображение</string>
+    <string name="images_scan">Сканирование изображений</string>
 </resources>

@@ -8,7 +8,11 @@ import testapplication.imageviewer.BuildConfig
 import testapplication.imageviewer.application.di.scopes.PerParentScreen
 import testapplication.imageviewer.application.utils.Logger
 import testapplication.imageviewer.domain.interactors.ImagesInteractor
+import testapplication.imageviewer.domain.interactors.NotificationsInteractor
+import testapplication.imageviewer.domain.interactors.SettingsInteractor
 import testapplication.imageviewer.domain.interactors.absctractions.IImagesInteractor
+import testapplication.imageviewer.domain.interactors.absctractions.INotificationsInteractor
+import testapplication.imageviewer.domain.interactors.absctractions.ISettingsInteractor
 import testapplication.imageviewer.presentation.screens.base.ParentView
 import testapplication.imageviewer.presentation.utils.FragmentNavigator
 
@@ -38,4 +42,12 @@ class ParentScreenModule(views: ParentView) {
     @Provides
     @PerParentScreen
     fun provideImagesInteractor(interactor: ImagesInteractor): IImagesInteractor = interactor
+
+    @Provides
+    @PerParentScreen
+    fun provideNotificationInteractor(interactor: NotificationsInteractor): INotificationsInteractor = interactor
+
+    @Provides
+    @PerParentScreen
+    fun provideSettingsInteractor(interactor: SettingsInteractor): ISettingsInteractor = interactor
 }

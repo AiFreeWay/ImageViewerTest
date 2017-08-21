@@ -14,9 +14,20 @@ import testapplication.imageviewer.presentation.factories.FragmentFactory
  */
 class FragmentNavigator(private val mActvity: Activity, fragmentManager: FragmentManager, fragmentLayoutId: Int) : SupportFragmentNavigator(fragmentManager, fragmentLayoutId) {
 
+    companion object {
+        private var sLastScreenKey: String? = null
+        private var sLastData: Bundle? = null
+
+        fun getLastScreenKey(): String? = sLastScreenKey
+        fun getLastData(): Bundle? = sLastData
+    }
+
     override fun createFragment(screenKey: String?, data: Any?): Fragment {
-        if (data is Bundle)
+        sLastScreenKey = screenKey
+        if (data is Bundle) {
+            sLastData = data
             return FragmentFactory.createFragment(screenKey, data)
+        }
         return FragmentFactory.createFragment(screenKey)
     }
 

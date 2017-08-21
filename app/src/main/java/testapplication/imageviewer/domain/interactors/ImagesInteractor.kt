@@ -12,13 +12,14 @@ import testapplication.imageviewer.data.repositories.abstractions.IRepository
 import testapplication.imageviewer.domain.interactors.absctractions.IImagesInteractor
 import testapplication.imageviewer.domain.mapper.ImageMapper
 import testapplication.imageviewer.domain.models.Image
+import testapplication.imageviewer.domain.models.Monade
 import javax.inject.Inject
 
 /**
  * Created by root on 14.08.17.
  */
 
-class ImagesInteractor @Inject constructor(val mRepository: IRepository) : IImagesInteractor {
+class ImagesInteractor @Inject constructor(private val mRepository: IRepository) : IImagesInteractor {
 
     init {
         if (BuildConfig.DEBUG) Logger.logDebug("created INTERACTOR ImagesInteractor")
@@ -29,7 +30,9 @@ class ImagesInteractor @Inject constructor(val mRepository: IRepository) : IImag
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { ImageMapper.mapImageFromNetwork(it) }
+                .flatMap { mRepository.putLastLoadedImage(it) }
                 .zipWith(mRepository.getFavoriteImages(), BiFunction { t1, t2 -> checkImageAsFavorite(t1, t2) })
+
     }
 
     override fun changeFavoriteFavorite(image: Image): Observable<Image> {
@@ -45,6 +48,16 @@ class ImagesInteractor @Inject constructor(val mRepository: IRepository) : IImag
                 .map { ImageMapper.mapImagesFromDB(it) }
     }
 
+    override fun isBecomeNewestImage(): Observable<Monade<Image>> {
+        return mRepository.getNewestImage()
+                .map { ImageMapper.mapImageFromNetwork(it) }
+                .zipWith(mRepository.getLastLoadedImage(), BiFunction { t1, t2 -> checkImageNeedUpdate(t1, t2) })
+    }
+
+    override fun subscribeOnUpdateImage(onUpdate: (Image) -> Unit) {
+        mRepository.subscribeOnUpdateImage(onUpdate)
+    }
+
     private fun checkImageAsFavorite(image: Image, favorites: List<ImageDB>): Image {
         image.setFavorite(false)
         favorites.forEach {
@@ -53,5 +66,9 @@ class ImagesInteractor @Inject constructor(val mRepository: IRepository) : IImag
             }
         }
         return image
+    }
+
+    private fun checkImageNeedUpdate(image: Image, lastLoaded: Image?): Monade<Image> {
+        return Monade(!TextUtils.equals(image.getUri(), lastLoaded?.getUri()), image)
     }
 }

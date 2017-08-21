@@ -8,24 +8,43 @@
         android:id="@+id/ac_main_appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/ac_main_toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/external_padding"
+            android:paddingStart="@dimen/external_padding">
+
+            <TextView
+                android:id="@+id/ac_main_tv_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/newest_image_title"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/toolbar_title_text" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/ac_main_swt_push_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.2"
+                android:checked="true" />
+        </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/ac_main_fl_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ac_main_appBarLayout" />
 

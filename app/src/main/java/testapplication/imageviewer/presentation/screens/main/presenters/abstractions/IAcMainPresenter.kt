@@ -11,4 +11,5 @@ interface IAcMainPresenter {
     fun attachView(view: MainView)
     fun navigateBack()
     fun getParentComponent(): ParentScreenComponent
+    fun changePushOnState(state: Boolean)
 }

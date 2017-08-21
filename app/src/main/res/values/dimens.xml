@@ -4,4 +4,7 @@
     <dimen name="external_padding">16dp</dimen>
     <dimen name="big_padding">36dp</dimen>
     <dimen name="holder_height">200dp</dimen>
+
+    <dimen name="toolbar_title_text">18sp</dimen>
+    <dimen name="toolbar_land_title_text">14sp</dimen>
 </resources>

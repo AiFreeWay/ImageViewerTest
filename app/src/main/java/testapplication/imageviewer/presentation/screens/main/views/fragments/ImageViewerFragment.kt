@@ -17,6 +17,7 @@ import testapplication.imageviewer.presentation.screens.main.presenters.FmtImage
 import testapplication.imageviewer.presentation.screens.main.presenters.abstractions.IFmtImageViewerPresenter
 import testapplication.imageviewer.presentation.screens.main.views.abstractions.IImageViewerView
 
+
 /**
  * Created by root on 14.08.17.
  */
@@ -39,7 +40,7 @@ class ImageViewerFragment : FragmentChildMainView(), IImageViewerView {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater!!.inflate(R.layout.fmt_image_viewer, container, false)
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view)
         return view
     }
 
@@ -75,6 +76,14 @@ class ImageViewerFragment : FragmentChildMainView(), IImageViewerView {
 
     override fun unlockButton() {
         mFabFavorite.isClickable = true
+    }
+
+    override fun showFavoriteListButton() {
+        mFabFavoriteList.visibility = View.VISIBLE
+    }
+
+    override fun hideFavoriteListButton() {
+        mFabFavoriteList.visibility = View.GONE
     }
 
     private fun initFab(image: Image) {

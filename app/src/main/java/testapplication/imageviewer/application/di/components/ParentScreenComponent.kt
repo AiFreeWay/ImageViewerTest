@@ -3,6 +3,7 @@ package testapplication.imageviewer.application.di.components
 import dagger.Component
 import testapplication.imageviewer.application.di.modules.ParentScreenModule
 import testapplication.imageviewer.application.di.scopes.PerParentScreen
+import testapplication.imageviewer.application.utils.PushNotificationController
 import testapplication.imageviewer.data.repositories.abstractions.IRepository
 import testapplication.imageviewer.presentation.screens.main.presenters.AcMainPresenter
 import testapplication.imageviewer.presentation.screens.main.presenters.FmtFavoriteImagesPresenter
@@ -16,6 +17,7 @@ import testapplication.imageviewer.presentation.screens.main.presenters.FmtImage
 interface ParentScreenComponent {
 
     fun provideRepository() : IRepository
+    fun providePushNotificationController() : PushNotificationController
 
     fun inject(presenter: AcMainPresenter)
     fun inject(presenter: FmtImageViewerPresenter)
